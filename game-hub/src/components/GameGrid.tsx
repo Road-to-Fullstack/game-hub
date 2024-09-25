@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-import { Text } from "@chakra-ui/react";
-import useGames from "../hooks/useGames";
-
-interface Game {
-  id: number;
-  name: string;
-}
+import { SimpleGrid, Text } from "@chakra-ui/react";
+import useGames, { Game } from "../hooks/useGames";
+import GameCard from "./GameCard";
 
 interface GameResults {
   count: number;
@@ -18,11 +14,15 @@ const GameGrid = () => {
   return (
     <>
       {error && <Text>{error}</Text>}
-      <ul>
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        padding="10px"
+        spacing={10}
+      >
         {games.map((game) => (
-          <li key={game.id}>{game.name}</li>
+          <GameCard key={game.id} game={game} />
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };
