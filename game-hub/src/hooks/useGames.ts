@@ -11,9 +11,7 @@ export interface Game {
     id: number;
     name: string;
     image: {
-        icon_url: string;
-        medium_url: string;
-        screen_url: string;
+        small_url: string;
       };
       platforms: Platform[]
   }
