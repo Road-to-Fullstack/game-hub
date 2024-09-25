@@ -1,23 +1,16 @@
-import { useEffect, useState } from "react";
 import { CanceledError } from "axios";
+import { useState, useEffect } from "react";
 import apiClientWithCache from "../services/api-client";
+import { Game } from "./useGames";
 
-export interface Platform{
-    id: number,
-    name: string,
-    abbreviation: string;
-}
-export interface Game {
+interface Genre{
     id: number;
-    name: string;
-    image: {
-        small_url: string;
-      };
-      platforms: Platform[]
-  }
+    name:string;
+}
 
-const useGames = () =>{
-    const [games, setGames] = useState<Game[]>([]);
+
+const useGenres = () =>{
+    const [genres, setGenres] = useState<Game[]>([]);
     const [error, setError] = useState("");
     const [isLoading, setLoading] = useState(false)
 
@@ -25,8 +18,8 @@ const useGames = () =>{
     useEffect(() => {
         const controller = new AbortController();
         setLoading(true);
-        apiClientWithCache("games", {signal: controller.signal})
-        .then((res) => {setGames(res.data.results)
+        apiClientWithCache("genres", {signal: controller.signal})
+        .then((res) => {setGenres(res.data.results)
             setLoading(false);
         })
         .catch((err) => {
@@ -37,7 +30,7 @@ const useGames = () =>{
         return () =>controller.abort();
     }, []);
 
-    return {games, error, isLoading};
+    return {genres, error, isLoading};
 }
 
-export default useGames
+export default useGenres;
