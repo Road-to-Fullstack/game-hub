@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { CanceledError } from "axios";
 import apiClientWithCache from "../services/api-client";
+
+export interface Platform{
+    id: number,
+    name: string,
+    abbreviation: string;
+}
 export interface Game {
     id: number;
     name: string;
@@ -8,8 +14,8 @@ export interface Game {
         icon_url: string;
         medium_url: string;
         screen_url: string;
-        // Add any other sizes the API provides
       };
+      platforms: Platform[]
   }
   interface GameResults {
     count: number;
